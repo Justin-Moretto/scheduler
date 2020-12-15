@@ -1,33 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import Button from "components/Button";
-import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
+import Appointment from "components/Appointment";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../../src/helpers/selectors.js";
+import useApplicationData from "../hooks/useApplicationData";
 
 import "components/Application.scss";
 
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
-
 export default function Application(props) {
-  const [day, setDay] = useState('monday');
-  //const [Interviewer, setInterviewer] = useState('1');
-  
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview
+  } = useApplicationData();
+
+  console.log('State.days:', state.days)
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const dailyInterviewers = getInterviewersForDay(state, state.day)
+
+  const selectedSchedule = dailyAppointments.map(appointment => {
+    const fullInterview = getInterview(state, appointment.interview);
+    //if (fullInterview) console.log('PASSING TO APT INDEX', fullInterview)
+    return (
+      <Appointment
+      key={appointment.id}
+      {...appointment} 
+      interview={fullInterview}
+      interviewers={dailyInterviewers}
+      bookInterview={bookInterview}
+      cancelInterview={cancelInterview}
+      />
+    );
+  });
+
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -39,8 +46,8 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList
-            days={days}
-            day={day}
+            days={state.days}
+            day={state.day}
             setDay={setDay}
           />
         </nav>
@@ -51,7 +58,8 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+        { selectedSchedule }
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
