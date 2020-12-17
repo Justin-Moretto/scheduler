@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-const axios = require('axios');
+import axios from "axios";
 
 export default function useApplicationData() {
 
   const [state, setState] = useState({
-    day: "",
+    day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
@@ -29,15 +29,28 @@ export default function useApplicationData() {
   }, []);
 
 
-  const getSpotsForDay = () => {
-    if (state.days) {
-      const dayFound = state.days.find(obj => obj.name === state.day);
-      const dayIndex = dayFound.id - 1;
-      const initialSpots = dayFound.spots;
-      return { dayIndex, initialSpots };
+  const getSpotsForDay = (state) => {
+    // if (state.days) {
+    //   const dayFound = {...state.days.find(obj => obj.name === state.day)};
+    //   const dayIndex = dayFound.id - 1;
+    //   const initialSpots = dayFound.spots;
+    //   return { dayIndex, initialSpots };
+    // }
+    //looks at current day and counts emoty appointments
+    const dayFound = {...state.days.find(obj => obj.name === state.day)};
+    let spots = 0;
+    for (const appointmentId of dayFound.appointments) {
+      if (state.appointments[appointmentId].interview === null ) {
+        spots++;
+      }
     }
+    const dayIndex = dayFound.id - 1;
+    return { spots, dayIndex };
+    
+    // const initialSpots = dayFound.spots;
+    // return { dayIndex, initialSpots };
+    
   }
-  console.log()
 
   function bookInterview(id, interview, edit = false) {
     const appointment = {
@@ -49,24 +62,21 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    console.log('is this an edit?', edit)
-    if (!edit) {
-      const { dayIndex, initialSpots } = getSpotsForDay();
-      const newSpots = initialSpots - 1;
-      const daySpotsUpdate = {
-        ...state.days[dayIndex],
-        spots: newSpots
-      }
-      const updatedDays = [...state.days]
-      updatedDays[dayIndex] = daySpotsUpdate;
+    const newStateTemp = { ...state, appointments }
 
-      setState(prev => ({...prev, days: updatedDays}))
-    }
+    console.log('is this an edit?', edit, "BOOKING INTERVIEW")
+
+    const {spots, dayIndex} = getSpotsForDay(newStateTemp);
+    
+    const daySpotsUpdate = { ...state.days[dayIndex], spots }
+
+    const updatedDays = [...state.days]
+    updatedDays[dayIndex] = daySpotsUpdate;
 
     return new Promise((resolve, reject) => {
       axios.put(`/api/appointments/${id}`, {interview})
-        .then(function (res){
-          setState({...state, appointments})
+        .then(function (res) {
+          setState({...state, appointments, days: updatedDays})
           resolve();
         })
         .catch(function (error) {
@@ -86,24 +96,18 @@ export default function useApplicationData() {
       [id]: appointment
     };
     
-    const { dayIndex, initialSpots } = getSpotsForDay();
-    const newSpots = initialSpots + 1;
-    console.log('state.days:', state.days)
-    console.log('days spots', state.days[dayIndex].spots)
-    console.log(`initial spots spots for ${dayIndex}: ${initialSpots}..remaining after deleting:`, newSpots)
-    const daySpotsUpdate = {
-      ...state.days[dayIndex],
-      spots: newSpots
-    }
+    const newStateTemp = { ...state, appointments }
+    const {spots, dayIndex} = getSpotsForDay(newStateTemp);
+    
+    const daySpotsUpdate = { ...state.days[dayIndex], spots }
+
     const updatedDays = [...state.days]
     updatedDays[dayIndex] = daySpotsUpdate;
-
-    setState(prev => ({...prev, days: updatedDays}))
 
     return new Promise((resolve, reject) => {
       axios.delete(`/api/appointments/${id}`)
         .then(function (res){
-          setState({...state, appointments})
+          setState({...state, appointments, days: updatedDays})
           resolve();
         })
         .catch(function (error) {
