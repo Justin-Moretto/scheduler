@@ -25,7 +25,6 @@ const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
-  //if (props.interview) console.log('apt index interview:', props)
   
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -53,11 +52,6 @@ export default function Appointment(props) {
     .then(() => transition(EMPTY))
     .catch(error => transition(ERROR_DELETE, true));
   };
-
-  // const edit = () => {
-  //   transition(EDIT);
-  //   console.log('edit mode. passing:', props.interview.student, props.interview.interviewer)
-  // }
 
   return (
     <article className="appointment" data-testid="appointment"> 

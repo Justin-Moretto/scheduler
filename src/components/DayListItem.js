@@ -16,7 +16,6 @@ export default function DayListItem(props) {
     return `${spots} spots remaining`;
   }
 
-  //console.log("DAYLISTITEM PROPS", props);
   return (
     <li className={dayClass} onClick={() => props.setDay(props.name)} data-testid="day" >
       <h2>{props.name}</h2>

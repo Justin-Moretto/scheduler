@@ -10,8 +10,6 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
-  //axios.get('/api/debug/reset') //for reseting db
-
   const setDay = day => setState({ ...state, day });
 
   useEffect(() => {
@@ -30,13 +28,6 @@ export default function useApplicationData() {
 
 
   const getSpotsForDay = (state) => {
-    // if (state.days) {
-    //   const dayFound = {...state.days.find(obj => obj.name === state.day)};
-    //   const dayIndex = dayFound.id - 1;
-    //   const initialSpots = dayFound.spots;
-    //   return { dayIndex, initialSpots };
-    // }
-    //looks at current day and counts emoty appointments
     const dayFound = {...state.days.find(obj => obj.name === state.day)};
     let spots = 0;
     for (const appointmentId of dayFound.appointments) {
@@ -46,9 +37,6 @@ export default function useApplicationData() {
     }
     const dayIndex = dayFound.id - 1;
     return { spots, dayIndex };
-    
-    // const initialSpots = dayFound.spots;
-    // return { dayIndex, initialSpots };
     
   }
 
@@ -63,8 +51,6 @@ export default function useApplicationData() {
     };
 
     const newStateTemp = { ...state, appointments }
-
-    console.log('is this an edit?', edit, "BOOKING INTERVIEW")
 
     const {spots, dayIndex} = getSpotsForDay(newStateTemp);
     

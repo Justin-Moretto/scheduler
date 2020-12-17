@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
@@ -15,13 +15,11 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
-  //console.log('State.days:', state.days)
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day)
 
   const selectedSchedule = dailyAppointments.map(appointment => {
     const fullInterview = getInterview(state, appointment.interview);
-    //if (fullInterview) console.log('PASSING TO APT INDEX', fullInterview)
     return (
       <Appointment
       key={appointment.id}

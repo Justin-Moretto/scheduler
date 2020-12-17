@@ -1,4 +1,8 @@
 # Interview Scheduler
+This is a React application that allows users to book and cancel interviews. It was done with the intention of learning React, Axios, Storybook, Jest and Cypress.
+
+This project was done by myself, Justin Moretto, for Lighthouse Labs' Web Dev bootcamp in 2020.
+
 
 ## Setup
 
@@ -21,3 +25,6 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Screenshots
+
