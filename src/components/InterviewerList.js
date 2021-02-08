@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import "components/InterviewerList.scss";
 
 function InterviewerList(props) {
-  //console.log('Generating Interviewer List:', props.interviewers, props.value)
   
   const interviewerList = props.interviewers.map(interviewer => {
     return (
@@ -18,7 +17,6 @@ function InterviewerList(props) {
       />
     );
   });
-
 
   return (
     <section className="interviewers">

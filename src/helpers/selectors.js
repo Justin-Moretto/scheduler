@@ -1,5 +1,3 @@
-//import Appointment from "components/Appointment";
-//import React from "react";
 
 export function getAppointmentsForDay(state, day) {
   const selectedDay = state.days.find(x => x.name === day);
@@ -13,11 +11,9 @@ export function getAppointmentsForDay(state, day) {
 
 export function getInterview(state, interview) {
   let fullInterview = interview || null;
-  //if (fullInterview) console.log('initial interview:', fullInterview)
   if (fullInterview) {
     fullInterview = {...fullInterview, interviewer: state.interviewers[interview.interviewer]}
   }
-  //if (fullInterview) console.log('FULL APT INTERVIEW:', fullInterview)
   return fullInterview;
 }
 

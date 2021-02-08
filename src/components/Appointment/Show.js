@@ -1,9 +1,8 @@
 
-// import InterviewerList from "components/InterviewerList";
 import React from "react";
 
 export default function Show(props) {
-  //console.log("SHOW PROPS::::", props)
+  console.log("SHOW PROPS::::", props)
   const onDelete = () => {
     props.onDelete(props.id)
   }
