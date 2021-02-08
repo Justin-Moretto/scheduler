@@ -27,4 +27,11 @@ npm run storybook
 ```
 
 ## Screenshots
+Daily Schedule
+!["screenshot of Daily Appointment Schedule"](https://github.com/Justin-Moretto/scheduler/blob/master/docs/Tuesday.png?raw=true)
 
+Book/Edit Appointment
+!["screenshot of Booking/Editing an Appointment"](https://github.com/Justin-Moretto/scheduler/blob/master/docs/Form.png?raw=true)
+
+Delete Appointment
+!["screenshot of Deleting Appointment"](https://github.com/Justin-Moretto/scheduler/blob/master/docs/ConfirmDelete.png?raw=true)
