@@ -3,11 +3,11 @@ This is a React application that allows users to book and cancel interviews.
 Built with the intention of learning React, Axios, Storybook, Jest and Cypress.
 
 Users may select available date/time slots and book appointments with interviewer who is scheduled for that day.
-They may also edit and delete appointments.
+They may also edit and delete appointments. Data persists thanks to axios requests to PostgreSQL database.
 
 Here is my back-end's repo: https://github.com/Justin-Moretto/scheduler-api
 
-Try it out here!
+Try the app here!
 https://nostalgic-pasteur-6e603d.netlify.app/
 (could take a minute for the heroku server to load)
 
