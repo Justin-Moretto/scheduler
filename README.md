@@ -9,7 +9,7 @@ Here is my back-end's repo: https://github.com/Justin-Moretto/scheduler-api
 
 Try it out here!
 https://nostalgic-pasteur-6e603d.netlify.app/
-(might take a min for the heroku server to load)
+(could take a minute for the heroku server to load)
 
 
 ## Setup
