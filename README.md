@@ -1,7 +1,15 @@
 # Interview Scheduler
-This is a React application that allows users to book and cancel interviews. It was done with the intention of learning React, Axios, Storybook, Jest and Cypress.
+This is a React application that allows users to book and cancel interviews.
+Built with the intention of learning React, Axios, Storybook, Jest and Cypress.
 
-This project was done by myself, Justin Moretto, for Lighthouse Labs' Web Dev bootcamp in 2020.
+Users may select available date/time slots and book appointments with interviewer who is scheduled for that day.
+They may also edit and delete appointments.
+
+Here is my back-end's repo: https://github.com/Justin-Moretto/scheduler-api
+
+Try it out here!
+https://nostalgic-pasteur-6e603d.netlify.app/
+(might take a min for the heroku server to load)
 
 
 ## Setup
