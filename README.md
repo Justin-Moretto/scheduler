@@ -12,6 +12,8 @@ https://nostalgic-pasteur-6e603d.netlify.app/
 (could take a minute for the heroku server to load)
 
 
+!["app demo gif"](https://github.com/Justin-Moretto/scheduler/blob/master/docs/scheduler-demo.gif?raw=true)
+
 ## Setup
 
 Install dependencies with `npm install`.
